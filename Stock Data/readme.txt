@@ -1,0 +1,1 @@
+This folder stores the data of each stock from 1996 to present day
