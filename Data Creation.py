@@ -41,5 +41,7 @@ for i in range(lenstuff):
 #print(fiftyarray)
 marketdata["fifty"]=fiftyarray
 marketdata["twenty"]=twentyarray
-marketdata[["Open","Close","fifty","twenty"]].to_csv(f"{stockticker}.csv")
+df = marketdata[["Open","Close","fifty","twenty"]]
 print(marketdata)
+
+df.to_csv("Users\justin\Documents\GitHub\Stock-algorithm\Stock Data" + f"{stockticker}.csv")
