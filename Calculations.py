@@ -14,7 +14,7 @@ today = date.today()
 #function that returns a csv file of the data asked for
 def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAverage = "20", endDate = today.isoformat(), startingCash = 100000.00):
     #makes the dataset required for calculations
-    Data_Creation.getStockData(tickerName, endDate= endDate)
+    Data_Creation.getStockData(tickerName, endDate= today.isoformat())
     df = pd.read_csv(path + "\\" + tickerName + ".csv")
 
     #makes new dataframe with specified range
@@ -61,10 +61,11 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
     #calls the buy or sell function if the condition is met
         if gracePeriodCounter > gracePeriod and action == "Buy":
             #sell shares
+            stockPrice = round(df2["Open"][index + 1], 2)
             marketValue = round(shares * stockPrice, 2)
             action = "Sell"
             cash = remainingCash + marketValue
-            spreadSheet["Date"].append(df2['Date'][index])
+            spreadSheet["Date"].append(df2['Date'][index + 1])
             spreadSheet["Price"].append(stockPrice)
             spreadSheet["Shares"].append(shares)
             spreadSheet["Market Value"].append(marketValue)
@@ -73,11 +74,12 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
             spreadSheet["Action"].append(action)
         elif gracePeriodCounter > gracePeriod and action == "Sell":
             #buy shares
+            stockPrice = round(df2["Open"][index + 1], 2)
             shares = int(cash/stockPrice)
             marketValue = round(shares * stockPrice, 2)
             remainingCash = round(cash - marketValue, 2)
             action = "Buy"
-            spreadSheet["Date"].append(df2['Date'][index])
+            spreadSheet["Date"].append(df2['Date'][index + 1])
             spreadSheet["Price"].append(stockPrice)
             spreadSheet["Shares"].append(shares)
             spreadSheet["Market Value"].append(marketValue)
