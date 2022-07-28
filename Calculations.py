@@ -42,19 +42,19 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
     #iterate through the dataframe
     #for index in df2.index:
     for index in df2.index:
-        stockPrice = round(df2["Open"][index])
+        stockPrice = round(df2["Open"][index], 2)
         oldMA = movingAveragePrice
         if movingAverage == "20":
-            movingAveragePrice = round(df2['Twenty DMA'][index])
+            movingAveragePrice = round(df2['Twenty DMA'][index], 2)
         elif movingAverage == "50":
-            movingAveragePrice = round(df2['Fifty DMA'][index])
+            movingAveragePrice = round(df2['Fifty DMA'][index], 2)
         else:
             print("Enter a valid moving day average")
             break
     #checks if something happens
         if (stockPrice < movingAveragePrice or movingAveragePrice < oldMA) and (action == "Buy"):
             gracePeriodCounter += 1
-        elif (stockPrice > movingAveragePrice or movingAveragePrice > oldMA) and (action == "Sell"):
+        elif (stockPrice > movingAveragePrice and movingAveragePrice > oldMA) and (action == "Sell"):
             gracePeriodCounter += 1
         else:
             gracePeriodCounter = 0
