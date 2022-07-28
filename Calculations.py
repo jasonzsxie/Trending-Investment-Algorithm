@@ -48,6 +48,8 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
             movingAveragePrice = round(df2['Twenty DMA'][index], 2)
         elif movingAverage == "50":
             movingAveragePrice = round(df2['Fifty DMA'][index], 2)
+        elif movingAverage == "200":
+            movingAveragePrice = round(df2['Two Hundred DMA'][index], 2)
         else:
             print("Enter a valid moving day average")
             break
@@ -88,7 +90,7 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
             spreadSheet["Action"].append(action)
     #save dictionary as csv
     endData = pd.DataFrame(spreadSheet, columns = ['Date', 'Price', 'Shares', 'Market Value', 'Remaining Amount', 'Total Amount', 'Action'])
-    endData.to_csv(parentDir + "\\tradingData.csv")
+    endData.to_csv(parentDir + "\\" + tickerName + " " + str(gracePeriod) + " Day Grace Period.csv")
 
 
 ticker = input("Enter the Company you wish to Track: ")
