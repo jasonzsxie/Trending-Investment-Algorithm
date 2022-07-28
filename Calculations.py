@@ -42,7 +42,7 @@ def startCalc(tickerName, startDate = "1996-01-01", gracePeriod = 0, movingAvera
     #iterate through the dataframe
     #for index in df2.index:
     for index in df2.index:
-        stockPrice = round(df2["Open"][index], 2)
+        stockPrice = round(df2["Close"][index], 2)
         oldMA = movingAveragePrice
         if movingAverage == "20":
             movingAveragePrice = round(df2['Twenty DMA'][index], 2)
